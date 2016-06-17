@@ -2,16 +2,18 @@
 var bio = {
     "name": "Pedro Barata",
     "role": "Application Developer",
-    "welcomeMessage":"I have a passion for acquiring new knowledge and I am able to quickly understand complex problems and devise effective solutions. This allows me to efficiently work with teams and organizations, helping them to overcome challenges by developing tools which add business value.",
     "contacts": {
         "mobile":  "+351 919171624" ,
         "email": "pedrommbarata@gmail.com",
         "github":"pedrommbarata",
-        "twitter":"pedrommbarata",
+        "twitter":"@pedrommbarata",
         "location":"Lisbon, Portugal"
     },
+    "welcomeMessage":"I have a passion for acquiring new knowledge and I am able to quickly understand complex problems and devise effective solutions. This allows me to efficiently work with teams and organizations, helping them to overcome challenges by developing tools which add business value.",
+    "biopic": "images\fry.jpg",
     "skills":["C#", ".NET","SQL", "T-SQL", "WCF","HTML","Javascript"]
 };
+
 
 var work= {
 jobs: [ 
@@ -41,18 +43,20 @@ work.display = function()
         for (var job in work.jobs) {
             if ( work.jobs.hasOwnProperty(job)) {
                 var element = work.jobs[job];
-               
+                
+                //Initialize and append header
                 $("#workExperience").append(HTMLworkStart);
+               
                 var formattedEmployer = HTMLworkEmployer.replace("%data%",element.employer);
-                
-                $(".work-entry:last").append(formattedEmployer + formattedTitle);
                 var formattedTitle = HTMLworkTitle.replace("%data%",element.title);
+                $(".work-entry:last").append(formattedEmployer + formattedTitle);
                 
-                $(".work-entry:last").append(formattedDate);
                 var formattedDate = HTMLworkDates.replace("%data%",element.startDate);
+                $(".work-entry:last").append(formattedDate);
               
                 var formattedLocation = HTMLworkLocation.replace("%data%",element.location);
                 $(".work-entry:last").append(formattedLocation);
+                
                 var formattedDescription = HTMLworkDescription.replace("%data%",element.description);
                 $(".work-entry:last").append(formattedDescription);
                 
@@ -88,6 +92,7 @@ projects.display = function()
                 if ( projects.projects.hasOwnProperty(prj)) {
                     var project = projects.projects[prj];
                     
+                    //Initialize and append header
                     $("#projects").append(HTMLprojectStart);
                     
                     var formattedTitle = HTMLprojectTitle.replace("%data%",project.title);
@@ -153,6 +158,6 @@ if(bio.skills.length>0){
 
 //Call the display methods for all the objects
 $("#main").append(internationalizeButton);
-displayWork();
+work.display();
 projects.display();
 $("#mapDiv"). append(googleMap);
