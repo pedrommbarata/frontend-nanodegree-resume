@@ -10,27 +10,78 @@ var bio = {
         "location":"Lisbon, Portugal"
     },
     "welcomeMessage":"I have a passion for acquiring new knowledge and I am able to quickly understand complex problems and devise effective solutions. This allows me to efficiently work with teams and organizations, helping them to overcome challenges by developing tools which add business value.",
-    "biopic": "images\fry.jpg",
+    "biopic": "images\\fry.jpg",
     "skills":["C#", ".NET","SQL", "T-SQL", "WCF","HTML","Javascript"]
 };
 
+bio.display = function(){
+    var formattedHeaderName = HTMLheaderName.replace("%data%",bio.name);
+    var formattedHeaderRole = HTMLheaderRole.replace("%data%",bio.role);
+    $("#header").prepend(formattedHeaderName + formattedHeaderRole);
 
-var work= {
+    //Display contact information
+    //Contacts are displayed as li in ul
+    //TOP
+    var formattedMobile = HTMLmobile.replace("%data%",bio.contacts.mobile);
+    $("#topContacts").append(formattedMobile);
+    var formattedEmail = HTMLemail.replace("%data%",bio.contacts.email);
+    $("#topContacts").append(formattedEmail);
+    var formattedGithub = HTMLgithub.replace("%data%",bio.contacts.github);
+    $("#topContacts").append(formattedGithub);
+
+    var formattedLocation = HTMLlocation.replace("%data%",bio.contacts.location);
+    $("#topContacts").append(formattedLocation);
+
+    //FOOTER
+    $("#footerContacts").append(formattedMobile);
+    $("#footerContacts").append(formattedEmail);
+    
+    var formattedPic = HTMLbioPic.replace("%data%",bio.biopic);
+    $("#header").append(formattedPic);
+
+    var formattedWelcomeMsg = HTMLwelcomeMsg.replace("%data%",bio.welcomeMessage) 
+    $("#header").append(formattedWelcomeMsg);
+
+
+    //Display SKILLS
+    if(bio.skills.length>0){
+        //Initialize and append header
+        $("#header").append(HTMLskillsStart);
+    
+        for (i = 0; i < bio.skills.length; i++) { 
+            var formattedSkill = HTMLskills.replace("%data%",bio.skills[i]);
+        	$("#skills").append(formattedSkill);
+        }   
+    }
+
+   
+}
+
+
+var work = {
 jobs: [ 
+    {
+   "employer": "KCS iT" ,
+   "employerURL": "http://en.kcsit.pt/",
+   "title": "Developer",
+   "location": "Lisboa, Porutgal",
+   "dates" : "06/2016 - in progress",
+   "description":"Solution developer."
+},
 {
    "employer": "MCG – Mind for Metal" ,
+   "employerURL": "http://www.mcg.pt/en/",
    "title": "Planning and Production Control Manager",
    "location": "Carregado, Porutgal",
-   "startDate" : 01/11/2015,
-   "endDate" : 10/06/2016,
+   "dates" : "11/2015 - 06/2016",
    "description":"Leading the production control team to ensure deadlines are met and devise new methods to continuously improve planning and production. Data analysis of production process bottlenecks to ensure a fine tune of the planning done at these critical points, increasing their efficiency."
 },
 {
    "employer": "MCG – Mind for Metal" ,
+   "employerURL": "http://www.mcg.pt/en/",
    "title": "Application Developer, Data Analyst",
    "location": "Carregado, Porutgal",
-   "startDate" : 01/10/2012,
-   "endDate" : 01/11/2015,
+   "dates" : "10/2012 - 11/2015",
    "description":"Devised effective solutions to complex problems of different areas, delivering time and cost saving, custom built applications to tight deadlines. Lead the IT department team, through several critical projects with great outcome. Thus helping the department, and team, grow and develop, resulting in a 15% increase on response."
 }
 ]
@@ -42,22 +93,25 @@ work.display = function()
     {
         for (var job in work.jobs) {
             if ( work.jobs.hasOwnProperty(job)) {
-                var element = work.jobs[job];
+                var jobItem = work.jobs[job];
                 
                 //Initialize and append header
                 $("#workExperience").append(HTMLworkStart);
                
-                var formattedEmployer = HTMLworkEmployer.replace("%data%",element.employer);
-                var formattedTitle = HTMLworkTitle.replace("%data%",element.title);
+                var formattedEmployer = HTMLworkEmployer.replace("%data%",jobItem.employer);    
+                //Add employerURL
+                formattedEmployer = formattedEmployer.replace("#",jobItem.employerURL);
+
+                var formattedTitle = HTMLworkTitle.replace("%data%",jobItem.title);
                 $(".work-entry:last").append(formattedEmployer + formattedTitle);
                 
-                var formattedDate = HTMLworkDates.replace("%data%",element.startDate);
+                var formattedDate = HTMLworkDates.replace("%data%",jobItem.dates);
                 $(".work-entry:last").append(formattedDate);
               
-                var formattedLocation = HTMLworkLocation.replace("%data%",element.location);
+                var formattedLocation = HTMLworkLocation.replace("%data%",jobItem.location);
                 $(".work-entry:last").append(formattedLocation);
                 
-                var formattedDescription = HTMLworkDescription.replace("%data%",element.description);
+                var formattedDescription = HTMLworkDescription.replace("%data%",jobItem.description);
                 $(".work-entry:last").append(formattedDescription);
                 
             }
@@ -84,8 +138,7 @@ var projects = {
     ]
 };
 
-projects.display = function()
-{
+projects.display = function(){
     if(projects.projects.length > 0)
     {
         for (var prj in projects.projects) {
@@ -98,7 +151,7 @@ projects.display = function()
                     var formattedTitle = HTMLprojectTitle.replace("%data%",project.title);
                     $(".project-entry:last").append(formattedTitle );
                     
-                    var formattedDates = HTMLprojectTitle.replace("%data%",project.dates);
+                    var formattedDates = HTMLprojectDates.replace("%data%",project.dates);
                     $(".project-entry:last").append(formattedDates );
                     
                     var formattedDescription = HTMLprojectDescription.replace("%data%",project.description);
@@ -117,12 +170,14 @@ var education = {
     {
         "name":"FCT-UNL",
         "location":"Monte da Caparica, Portugal",
+        "dates": "2005-2007",
         "degree": "MsC in Biomedical Engineering",
         "url":"http://www.fct.unl.pt/en"
     },
     {
         "name":"FCT-UNL",
         "location":"Monte da Caparica, Portugal",
+        "dates": "2002-2005",
         "degree": "BsC in Biomedical Engineering",
         "url":"http://www.fct.unl.pt/en"
     }
@@ -131,33 +186,79 @@ var education = {
         {
             "title": "Javascript Basics",
             "school": "Udacity",
-            "startDate":"",
-            "endDate":""
+            "dates":"06/2016",
+            "url":"https://classroom.udacity.com/courses/ud804"
         }
     ]
 };
+education.display = function(){
+    if(education.schools.length > 0)
+    {
+        for (var sch in education.schools) {
+                if ( education.schools.hasOwnProperty(sch)) {
+                    var school = education.schools[sch];
+                    
+                    //Initialize and append header
+                    $("#education").append(HTMLschoolStart);
+                    
+                    var formattedName = HTMLschoolName.replace("%data%",school.name);
+                    var formattedDegree = HTMLschoolDegree.replace("%data%",school.degree);
+                    $(".education-entry:last").append(formattedName + formattedDegree);
 
-var formattedHeaderName = HTMLheaderName.replace("%data%",bio.name);
-var formatedHeaderRole = HTMLheaderRole.replace("%data%",bio.role);
-$("#header").append(formattedHeaderName + formatedHeaderRole);
+                    var formattedDates = HTMLschoolDates.replace("%data%",school.dates);
+                    $(".education-entry:last").append(formattedDates);
 
-if(bio.skills.length>0){
-    $("#header").append(HTMLskillsStart);
-    
-    var formatedSkill = "";
-    for (i = 0; i < bio.skills.length; i++) { 
-        formatedSkill = HTMLskills.replace("%data%",bio.skills[i]);
-         $("#skills").append(formatedSkill);
+                    var formattedLocation = HTMLschoolLocation.replace("%data%",school.location);
+                    $(".education-entry:last").append(formattedLocation);
+
+                    // var formattedMajor = HTMLschoolMajor.replace("%data%","");
+                    // $(".education-entry:last").append(formattedMajor);
+            }
+        }
+    }
+
+    if(education.onlineCourses.length > 0)
+    {
+        for(var onl in education.onlineCourses)
+        {
+            if ( education.onlineCourses.hasOwnProperty(onl)) {
+                    var course = education.onlineCourses[onl];
+                    //Initialize and append header
+                    $("#education").append(HTMLonlineClasses);
+                    //Use same as previous block to ensure correct formating
+                    $("#education").append(HTMLschoolStart);
+                    
+                    var formattedTitle = HTMLonlineTitle.replace("%data%",course.title);
+                    var formattedSchool = HTMLonlineTitle.replace("%data%",course.school);
+                    $(".education-entry:last").append(formattedTitle + formattedSchool);
+
+                    var formattedDates = HTMLonlineDates.replace("%data%",course.dates);
+                    $(".education-entry:last").append(formattedDates);
+
+                    var formattedURL = HTMLonlineURL.replace("%data%",course.url);
+                    formattedURL = formattedURL.replace("#",course.url);
+                    $(".education-entry:last").append(formattedURL);
+            }
+
+        }
+
     }
 }
 
+function inName(_name)
+{
+    var iName = _name.trim();
+    iName = iName.split(" ");
+    console.log(iName);
 
 
-
-
+    return iName;
+}
 
 //Call the display methods for all the objects
-$("#main").append(internationalizeButton);
+bio.display();
 work.display();
 projects.display();
+education.display();
+$("#main").append(internationalizeButton);
 $("#mapDiv"). append(googleMap);
