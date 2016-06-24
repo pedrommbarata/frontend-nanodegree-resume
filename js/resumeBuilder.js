@@ -10,7 +10,7 @@ var bio = {
         "location":"Lisbon, Portugal"
     },
     "welcomeMessage":"I have a passion for acquiring new knowledge and I am able to quickly understand complex problems and devise effective solutions. This allows me to efficiently work with teams and organizations, helping them to overcome challenges by developing tools which add business value.",
-    "biopic": "images\\fry.jpg",
+    "biopic": "images\\li_profile.jpg",
     "skills":["C#", ".NET","SQL", "T-SQL", "WCF","HTML","Javascript"]
 };
 
