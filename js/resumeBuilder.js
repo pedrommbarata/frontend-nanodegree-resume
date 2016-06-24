@@ -11,7 +11,7 @@ var bio = {
     },
     "welcomeMessage":"I have a passion for acquiring new knowledge and I am able to quickly understand complex problems and devise effective solutions. This allows me to efficiently work with teams and organizations, helping them to overcome challenges by developing tools which add business value.",
     "biopic": "images\\li_profile.jpg",
-    "skills":["C#", ".NET","SQL", "T-SQL", "WCF","HTML","Javascript"]
+    "skills":["C#", ".NET","Javascript","SQL", "T-SQL", "WCF","HTML","VBA", "PowerPivots"]
 };
 
 bio.display = function(){
@@ -188,6 +188,18 @@ var education = {
             "school": "Udacity",
             "dates":"06/2016",
             "url":"https://classroom.udacity.com/courses/ud804"
+        },
+        {
+            "title": "Learn AngularJS 1.X",
+            "school": "CodeAcademy",
+            "dates":"06/2016",
+            "url":"https://codecademy.com/learn/learn-angularjs"
+        },
+         {
+            "title": "Learn Git",
+            "school": "CodeAcademy",
+            "dates":"05/2016",
+            "url":"https://codecademy.com/learn/learn-git"
         }
     ]
 };
@@ -219,17 +231,17 @@ education.display = function(){
 
     if(education.onlineCourses.length > 0)
     {
+         //Initialize and append header
+        $("#education").append(HTMLonlineClasses);
+
         for(var onl in education.onlineCourses)
         {
             if ( education.onlineCourses.hasOwnProperty(onl)) {
                     var course = education.onlineCourses[onl];
-                    //Initialize and append header
-                    $("#education").append(HTMLonlineClasses);
                     //Use same as previous block to ensure correct formating
                     $("#education").append(HTMLschoolStart);
-                    
                     var formattedTitle = HTMLonlineTitle.replace("%data%",course.title);
-                    var formattedSchool = HTMLonlineTitle.replace("%data%",course.school);
+                    var formattedSchool = HTMLonlineSchool.replace("%data%",course.school);
                     $(".education-entry:last").append(formattedTitle + formattedSchool);
 
                     var formattedDates = HTMLonlineDates.replace("%data%",course.dates);
@@ -238,6 +250,8 @@ education.display = function(){
                     var formattedURL = HTMLonlineURL.replace("%data%",course.url);
                     formattedURL = formattedURL.replace("#",course.url);
                     $(".education-entry:last").append(formattedURL);
+
+                    $(".education-entry:last").append(spacerDiv);
             }
 
         }

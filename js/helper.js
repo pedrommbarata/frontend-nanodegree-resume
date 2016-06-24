@@ -58,6 +58,7 @@ var HTMLonlineURL = '<br><a href="#" target="_blank">%data%</a>';
 var internationalizeButton = '<button>Internationalize</button>';
 var googleMap = '<div id="map"></div>';
 
+var spacerDiv = '<div>&nbsp;</div>'
 
 /*
 The International Name challenge in Lesson 2 where you'll create a function that will need this helper code to run. Don't delete! It hooks up your code to the button you'll be appending.
@@ -247,3 +248,4 @@ window.addEventListener('resize', function(e) {
   //Make sure the map bounds get updated on page resize
   map.fitBounds(mapBounds);
 });
+
