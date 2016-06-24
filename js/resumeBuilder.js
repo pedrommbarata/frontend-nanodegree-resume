@@ -274,5 +274,5 @@ bio.display();
 work.display();
 projects.display();
 education.display();
-$("#main").append(internationalizeButton);
+// $("#main").append(internationalizeButton);
 $("#mapDiv"). append(googleMap);

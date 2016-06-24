@@ -23,6 +23,7 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
 
   <!-- Load the page styles. -->
   <link href="css/style.css" rel="stylesheet">
+ <link href="css/accordion.css" rel="stylesheet">
 
   <!--
   jQuery is a common JavaScript library for reading and making changes to the
@@ -41,7 +42,8 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
 
   <!-- More on helper.js in the class -->
   <script src="js/helper.js"></script>
-
+  
+  <script src="js/accordion.js"></script>
   
   <!--
   Uncomment the <script> tag below when you're ready to add an interactive
@@ -63,19 +65,37 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
       <ul id="topContacts" class="flex-box"></ul>
     </div>
     <div style="clear: both;"></div>
-      <div id="workExperience" class="gray">
-          <h2>Work Experience</h2>
+    
+    
+
+      <button class="accordion active gray">Work Experience</button>
+      <div class="panel show">    
+        <div id="workExperience" class="gray">
+            <h2></h2>
+        </div>
       </div>
-      <div id="projects">
-        <h2>Projects</h2>
+      
+      <button class="accordion white" style="{ background-color: white !important;}">Projects</button>
+      <div class="panel">
+        <div id="projects">
+          <h2></h2>
+        </div>
       </div>
+      
+      <button class="accordion active gray">Education</button>
+      <div class="panel show">
       <div id="education" class="gray">
-        <h2>Education</h2>
+        <h2></h2>
       </div>
+      </div>
+      
+      <button class="accordion white">Where I've Lived and Worked</button>
+      <div class="panel">
       <div id="mapDiv">
-        <h2>Where I've Lived and Worked</h2>
+        <h2></h2>
       </div>
     </div>
+   
     <div id="lets-connect" class="dark-gray">
       <h2 class="orange center-text">Let's Connect</h2>
         <ul id="footerContacts" class="flex-box">
